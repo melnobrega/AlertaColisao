@@ -1,0 +1,68 @@
+
+void setup() {
+  Serial.begin(9600); 
+  pinMode(7, OUTPUT);
+  pinMode(6, INPUT);
+  pinMode(9, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(2, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(7, LOW);
+  delayMicroseconds(2);
+  digitalWrite(7, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(7, LOW);
+
+  long time = pulseIn(6, HIGH);
+  float distancia = (time*0.0001*340)/2;
+  Serial.println(distancia);
+
+  if(distancia > 20){
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    digitalWrite(3, LOW);
+    digitalWrite(2, LOW);
+    tone(11, 500);
+    delay(500);
+    noTone(11);
+    delay(100);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    delay(100);
+  }else if(distancia >=10 && distancia <= 20){
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(3, LOW);
+    digitalWrite(2, LOW);
+    tone(11, 500);
+    delay(500);
+    noTone(11);
+    delay(100);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(100);
+  }else{
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    digitalWrite(3, HIGH);
+    digitalWrite(2, HIGH);
+    tone(11, 1000);
+    delay(500);
+    noTone(11);
+    delay(100);
+    digitalWrite(3, LOW);
+    digitalWrite(2, LOW);
+    delay(100);
+  }
+}
