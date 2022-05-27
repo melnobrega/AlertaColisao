@@ -1,3 +1,29 @@
+#include <PubSubClient.h>
+
+const char* ssid = "BIGOBIGO";
+const char* password = "bigobigo123";
+
+const char* mqtt_server = "broker.mqtt-dashboard.com";
+const int mqtt_server_port = 8000;
+
+#define MSG_BUFFER_SIZE (500)
+WiFiClient client;
+PubSubClient mqtt_client(client);
+long lastMsg = 0;
+
+String clientID = "clientId-o4ToENriAK";
+
+String topicoPrefixo = "mack18505554";
+String topicoTodos = topicoPrefixo + "/%";
+String topico_0 = topicoPrefixo + "/hello";
+String mensagem_0 = "Arduino UNO Connect";
+String topico_1 = topicoPrefixo + "/sensor1";
+String mensagem_1 = "";
+String mensagemTemp = "";
+
+int distancia = 0;
+int primeiraDistancia = 0;
+int ultimaDistancia = 0;
 
 void setup() {
   Serial.begin(9600); 
